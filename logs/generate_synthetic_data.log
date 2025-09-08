@@ -1,0 +1,670 @@
+2025-09-01 02:16:17,534 INFO [generate_synthetic_data:52] Starting synthetic data generation script at 1756710977.5346437
+2025-09-01 02:16:17,535 DEBUG [generate_synthetic_data:53] DB connection target: host=localhost, db=langtech_wh, user=spark_user
+2025-09-01 02:16:17,559 INFO [generate_synthetic_data:272] Created SQLAlchemy engine
+2025-09-01 02:16:17,764 INFO [generate_synthetic_data:278] Inserted 44 languages rows into languages table
+2025-09-01 02:16:17,878 INFO [generate_synthetic_data:299] Inserted 100 courses rows into courses table
+2025-09-01 02:17:31,895 INFO [generate_synthetic_data:327] Users table currently has 0 rows
+2025-09-01 02:17:41,144 ERROR [generate_synthetic_data:335] Failed writing users to database
+Traceback (most recent call last):
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\dialects\mssql\pyodbc.py", line 649, in do_executemany
+    super(MSDialect_pyodbc, self).do_executemany(
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\default.py", line 733, in do_executemany
+    cursor.executemany(statement, parameters)
+pyodbc.IntegrityError: ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert explicit value for identity column in table 'users' when IDENTITY_INSERT is set to OFF. (544) (SQLExecDirectW)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\asoye\Documents\Projects\churnalytics\src\data_generation\generate_synthetic_data.py", line 329, in <module>
+    users_df.to_sql('users', conn, if_exists='append', index=False)
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\io\sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\io\sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\io\sql.py", line 1507, in insert_records
+    raise err
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\io\sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\io\sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\io\sql.py", line 951, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\sql\elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\util\compat.py", line 211, in raise_
+    raise exception
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\dialects\mssql\pyodbc.py", line 649, in do_executemany
+    super(MSDialect_pyodbc, self).do_executemany(
+  File "C:\Users\asoye\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\default.py", line 733, in do_executemany
+    cursor.executemany(statement, parameters)
+sqlalchemy.exc.IntegrityError: (pyodbc.IntegrityError) ('23000', "[23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot insert explicit value for identity column in table 'users' when IDENTITY_INSERT is set to OFF. (544) (SQLExecDirectW)")
+[SQL: INSERT INTO users (user_id, signup_date, age, gender, country, device_type, referral_source, learning_motivation, email_verified, duolingo_plus_subscribed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ((0, datetime.datetime(2023, 9, 27, 0, 0), 34, 'Female', 'Poland', 'Android', 'Ad', 'School', 1, 1), (1, datetime.datetime(2025, 6, 20, 0, 0), 38, 'Non-binary', 'China', 'iOS', 'Organic', 'Hobby', 1, 0), (2, datetime.datetime(2023, 10, 21, 0, 0), 26, 'Male', 'Samoa', 'iOS', 'Organic', 'Hobby', 1, 0), (3, datetime.datetime(2024, 3, 29, 0, 0), 31, 'Non-binary', 'Northern Mariana Islands', 'Android', 'Organic', 'School', 1, 0), (4, datetime.datetime(2024, 9, 30, 0, 0), 31, 'Prefer not to say', 'Romania', 'Web', 'Organic', 'Hobby', 1, 1), (5, datetime.datetime(2024, 2, 10, 0, 0), 26, 'Female', 'Australia', 'Android', 'Friend', 'School', 1, 0), (6, datetime.datetime(2023, 10, 20, 0, 0), 33, 'Prefer not to say', 'Venezuela', 'iOS', 'Organic', 'Career', 1, 0), (7, datetime.datetime(2023, 12, 9, 0, 0), 24, 'Non-binary', 'Saint Martin', 'Web', 'Ad', 'Travel', 1, 0)  ... displaying 10 of 1000000 total bound parameter sets ...  (999998, datetime.datetime(2024, 3, 17, 0, 0), 18, 'Female', 'Mongolia', 'Android', 'Organic', 'Career', 1, 1), (999999, datetime.datetime(2025, 1, 4, 0, 0), 27, 'Male', 'Jordan', 'iOS', 'Ad', 'Hobby', 1, 0))]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+2025-09-01 02:17:41,158 INFO [generate_synthetic_data:342] Starting batch 1-10000
+2025-09-01 02:17:50,517 INFO [generate_synthetic_data:362] Batch 1-10000: inserted 20026 user_courses rows
+2025-09-01 03:15:43,641 INFO [generate_synthetic_data:415] Batch 1-10000: inserted daily_activity rows=3650645
+2025-09-01 03:43:51,809 INFO [generate_synthetic_data:424] Batch 1-10000: inserted sessions rows=4640629
+2025-09-01 03:50:18,981 INFO [generate_synthetic_data:433] Batch 1-10000: inserted notifications rows=1095139
+2025-09-01 03:50:22,067 INFO [generate_synthetic_data:442] Batch 1-10000: inserted churn_labels rows=10000
+2025-09-01 03:50:22,072 INFO [generate_synthetic_data:342] Starting batch 10001-20000
+2025-09-01 03:50:30,370 INFO [generate_synthetic_data:362] Batch 10001-20000: inserted 20041 user_courses rows
+2025-09-01 04:53:48,929 INFO [generate_synthetic_data:415] Batch 10001-20000: inserted daily_activity rows=3659519
+2025-09-01 05:22:40,643 INFO [generate_synthetic_data:424] Batch 10001-20000: inserted sessions rows=4653781
+2025-09-01 05:28:58,157 INFO [generate_synthetic_data:433] Batch 10001-20000: inserted notifications rows=1096688
+2025-09-01 05:29:01,550 INFO [generate_synthetic_data:442] Batch 10001-20000: inserted churn_labels rows=10000
+2025-09-01 05:29:01,556 INFO [generate_synthetic_data:342] Starting batch 20001-30000
+2025-09-01 05:29:09,900 INFO [generate_synthetic_data:362] Batch 20001-30000: inserted 19919 user_courses rows
+2025-09-01 06:29:06,353 INFO [generate_synthetic_data:415] Batch 20001-30000: inserted daily_activity rows=3666073
+2025-09-01 06:58:23,194 INFO [generate_synthetic_data:424] Batch 20001-30000: inserted sessions rows=4656887
+2025-09-01 07:04:44,163 INFO [generate_synthetic_data:433] Batch 20001-30000: inserted notifications rows=1099679
+2025-09-01 07:04:47,349 INFO [generate_synthetic_data:442] Batch 20001-30000: inserted churn_labels rows=10000
+2025-09-01 07:04:47,365 INFO [generate_synthetic_data:342] Starting batch 30001-40000
+2025-09-01 07:04:55,136 INFO [generate_synthetic_data:362] Batch 30001-40000: inserted 20043 user_courses rows
+2025-09-01 08:03:56,053 INFO [generate_synthetic_data:415] Batch 30001-40000: inserted daily_activity rows=3663707
+2025-09-01 08:32:12,574 INFO [generate_synthetic_data:424] Batch 30001-40000: inserted sessions rows=4652316
+2025-09-01 08:38:11,017 INFO [generate_synthetic_data:433] Batch 30001-40000: inserted notifications rows=1098097
+2025-09-01 08:38:14,034 INFO [generate_synthetic_data:442] Batch 30001-40000: inserted churn_labels rows=10000
+2025-09-01 08:38:14,041 INFO [generate_synthetic_data:342] Starting batch 40001-50000
+2025-09-01 08:38:22,146 INFO [generate_synthetic_data:362] Batch 40001-50000: inserted 19957 user_courses rows
+2025-09-01 09:36:02,422 INFO [generate_synthetic_data:415] Batch 40001-50000: inserted daily_activity rows=3658910
+2025-09-01 10:01:57,605 INFO [generate_synthetic_data:424] Batch 40001-50000: inserted sessions rows=4639479
+2025-09-01 10:07:57,482 INFO [generate_synthetic_data:433] Batch 40001-50000: inserted notifications rows=1097466
+2025-09-01 10:08:00,610 INFO [generate_synthetic_data:442] Batch 40001-50000: inserted churn_labels rows=10000
+2025-09-01 10:08:00,619 INFO [generate_synthetic_data:342] Starting batch 50001-60000
+2025-09-01 10:08:08,009 INFO [generate_synthetic_data:362] Batch 50001-60000: inserted 19981 user_courses rows
+2025-09-01 11:07:00,119 INFO [generate_synthetic_data:415] Batch 50001-60000: inserted daily_activity rows=3678267
+2025-09-01 11:35:35,989 INFO [generate_synthetic_data:424] Batch 50001-60000: inserted sessions rows=4679687
+2025-09-01 11:41:10,015 INFO [generate_synthetic_data:433] Batch 50001-60000: inserted notifications rows=1102325
+2025-09-01 11:41:13,229 INFO [generate_synthetic_data:442] Batch 50001-60000: inserted churn_labels rows=10000
+2025-09-01 11:41:13,229 INFO [generate_synthetic_data:342] Starting batch 60001-70000
+2025-09-01 11:41:20,886 INFO [generate_synthetic_data:362] Batch 60001-70000: inserted 19923 user_courses rows
+2025-09-01 12:37:52,173 INFO [generate_synthetic_data:415] Batch 60001-70000: inserted daily_activity rows=3642480
+2025-09-01 13:03:13,271 INFO [generate_synthetic_data:424] Batch 60001-70000: inserted sessions rows=4629157
+2025-09-01 13:09:04,919 INFO [generate_synthetic_data:433] Batch 60001-70000: inserted notifications rows=1093816
+2025-09-01 13:09:07,866 INFO [generate_synthetic_data:442] Batch 60001-70000: inserted churn_labels rows=10000
+2025-09-01 13:09:07,868 INFO [generate_synthetic_data:342] Starting batch 70001-80000
+2025-09-01 13:09:15,540 INFO [generate_synthetic_data:362] Batch 70001-80000: inserted 20165 user_courses rows
+2025-09-01 14:06:07,228 INFO [generate_synthetic_data:415] Batch 70001-80000: inserted daily_activity rows=3709028
+2025-09-01 14:31:57,488 INFO [generate_synthetic_data:424] Batch 70001-80000: inserted sessions rows=4721409
+2025-09-01 14:37:54,635 INFO [generate_synthetic_data:433] Batch 70001-80000: inserted notifications rows=1113280
+2025-09-01 14:37:57,494 INFO [generate_synthetic_data:442] Batch 70001-80000: inserted churn_labels rows=10000
+2025-09-01 14:37:57,494 INFO [generate_synthetic_data:342] Starting batch 80001-90000
+2025-09-01 14:38:04,369 INFO [generate_synthetic_data:362] Batch 80001-90000: inserted 20018 user_courses rows
+2025-09-01 15:35:04,883 INFO [generate_synthetic_data:415] Batch 80001-90000: inserted daily_activity rows=3666330
+2025-09-01 16:00:05,124 INFO [generate_synthetic_data:424] Batch 80001-90000: inserted sessions rows=4665300
+2025-09-01 16:05:56,989 INFO [generate_synthetic_data:433] Batch 80001-90000: inserted notifications rows=1099516
+2025-09-01 16:06:00,206 INFO [generate_synthetic_data:442] Batch 80001-90000: inserted churn_labels rows=10000
+2025-09-01 16:06:00,206 INFO [generate_synthetic_data:342] Starting batch 90001-100000
+2025-09-01 16:06:08,837 INFO [generate_synthetic_data:362] Batch 90001-100000: inserted 19850 user_courses rows
+2025-09-01 17:06:14,444 INFO [generate_synthetic_data:415] Batch 90001-100000: inserted daily_activity rows=3662454
+2025-09-01 17:33:26,664 INFO [generate_synthetic_data:424] Batch 90001-100000: inserted sessions rows=4652667
+2025-09-01 17:39:49,428 INFO [generate_synthetic_data:433] Batch 90001-100000: inserted notifications rows=1099632
+2025-09-01 17:39:52,804 INFO [generate_synthetic_data:442] Batch 90001-100000: inserted churn_labels rows=10000
+2025-09-01 17:39:52,804 INFO [generate_synthetic_data:342] Starting batch 100001-110000
+2025-09-01 17:40:01,013 INFO [generate_synthetic_data:362] Batch 100001-110000: inserted 20063 user_courses rows
+2025-09-01 18:34:58,952 INFO [generate_synthetic_data:415] Batch 100001-110000: inserted daily_activity rows=3657145
+2025-09-01 19:00:49,161 INFO [generate_synthetic_data:424] Batch 100001-110000: inserted sessions rows=4644954
+2025-09-01 19:07:18,841 INFO [generate_synthetic_data:433] Batch 100001-110000: inserted notifications rows=1096829
+2025-09-01 19:07:22,066 INFO [generate_synthetic_data:442] Batch 100001-110000: inserted churn_labels rows=10000
+2025-09-01 19:07:22,066 INFO [generate_synthetic_data:342] Starting batch 110001-120000
+2025-09-01 19:07:30,249 INFO [generate_synthetic_data:362] Batch 110001-120000: inserted 20010 user_courses rows
+2025-09-01 20:05:58,258 INFO [generate_synthetic_data:415] Batch 110001-120000: inserted daily_activity rows=3667603
+2025-09-01 20:33:11,810 INFO [generate_synthetic_data:424] Batch 110001-120000: inserted sessions rows=4657740
+2025-09-01 20:39:30,057 INFO [generate_synthetic_data:433] Batch 110001-120000: inserted notifications rows=1099708
+2025-09-01 20:39:33,518 INFO [generate_synthetic_data:442] Batch 110001-120000: inserted churn_labels rows=10000
+2025-09-01 20:39:33,518 INFO [generate_synthetic_data:342] Starting batch 120001-130000
+2025-09-01 20:39:40,912 INFO [generate_synthetic_data:362] Batch 120001-130000: inserted 19930 user_courses rows
+2025-09-01 21:37:48,079 INFO [generate_synthetic_data:415] Batch 120001-130000: inserted daily_activity rows=3670677
+2025-09-01 22:05:08,357 INFO [generate_synthetic_data:424] Batch 120001-130000: inserted sessions rows=4658368
+2025-09-01 22:11:26,619 INFO [generate_synthetic_data:433] Batch 120001-130000: inserted notifications rows=1101339
+2025-09-01 22:11:29,550 INFO [generate_synthetic_data:442] Batch 120001-130000: inserted churn_labels rows=10000
+2025-09-01 22:11:29,550 INFO [generate_synthetic_data:342] Starting batch 130001-140000
+2025-09-01 22:11:37,374 INFO [generate_synthetic_data:362] Batch 130001-140000: inserted 19926 user_courses rows
+2025-09-01 23:10:06,688 INFO [generate_synthetic_data:415] Batch 130001-140000: inserted daily_activity rows=3664847
+2025-09-01 23:37:43,318 INFO [generate_synthetic_data:424] Batch 130001-140000: inserted sessions rows=4661843
+2025-09-01 23:44:04,399 INFO [generate_synthetic_data:433] Batch 130001-140000: inserted notifications rows=1098973
+2025-09-01 23:44:07,908 INFO [generate_synthetic_data:442] Batch 130001-140000: inserted churn_labels rows=10000
+2025-09-01 23:44:07,908 INFO [generate_synthetic_data:342] Starting batch 140001-150000
+2025-09-01 23:44:16,582 INFO [generate_synthetic_data:362] Batch 140001-150000: inserted 19895 user_courses rows
+2025-09-02 00:44:47,924 INFO [generate_synthetic_data:415] Batch 140001-150000: inserted daily_activity rows=3698713
+2025-09-02 01:13:07,065 INFO [generate_synthetic_data:424] Batch 140001-150000: inserted sessions rows=4710772
+2025-09-02 01:19:38,899 INFO [generate_synthetic_data:433] Batch 140001-150000: inserted notifications rows=1109037
+2025-09-02 01:19:41,999 INFO [generate_synthetic_data:442] Batch 140001-150000: inserted churn_labels rows=10000
+2025-09-02 01:19:42,001 INFO [generate_synthetic_data:342] Starting batch 150001-160000
+2025-09-02 01:19:50,288 INFO [generate_synthetic_data:362] Batch 150001-160000: inserted 20011 user_courses rows
+2025-09-02 02:18:52,445 INFO [generate_synthetic_data:415] Batch 150001-160000: inserted daily_activity rows=3651998
+2025-09-02 02:46:14,428 INFO [generate_synthetic_data:424] Batch 150001-160000: inserted sessions rows=4638785
+2025-09-02 02:52:43,151 INFO [generate_synthetic_data:433] Batch 150001-160000: inserted notifications rows=1097172
+2025-09-02 02:52:46,268 INFO [generate_synthetic_data:442] Batch 150001-160000: inserted churn_labels rows=10000
+2025-09-02 02:52:46,270 INFO [generate_synthetic_data:342] Starting batch 160001-170000
+2025-09-02 02:52:54,235 INFO [generate_synthetic_data:362] Batch 160001-170000: inserted 19957 user_courses rows
+2025-09-02 03:50:28,175 INFO [generate_synthetic_data:415] Batch 160001-170000: inserted daily_activity rows=3634362
+2025-09-02 04:20:53,211 INFO [generate_synthetic_data:424] Batch 160001-170000: inserted sessions rows=4618602
+2025-09-02 04:27:55,542 INFO [generate_synthetic_data:433] Batch 160001-170000: inserted notifications rows=1089387
+2025-09-02 04:27:58,881 INFO [generate_synthetic_data:442] Batch 160001-170000: inserted churn_labels rows=10000
+2025-09-02 04:27:58,881 INFO [generate_synthetic_data:342] Starting batch 170001-180000
+2025-09-02 04:28:07,553 INFO [generate_synthetic_data:362] Batch 170001-180000: inserted 19841 user_courses rows
+2025-09-02 05:30:20,714 INFO [generate_synthetic_data:415] Batch 170001-180000: inserted daily_activity rows=3696849
+2025-09-02 05:58:42,807 INFO [generate_synthetic_data:424] Batch 170001-180000: inserted sessions rows=4701342
+2025-09-02 06:05:22,498 INFO [generate_synthetic_data:433] Batch 170001-180000: inserted notifications rows=1109191
+2025-09-02 06:05:25,962 INFO [generate_synthetic_data:442] Batch 170001-180000: inserted churn_labels rows=10000
+2025-09-02 06:05:25,962 INFO [generate_synthetic_data:342] Starting batch 180001-190000
+2025-09-02 06:05:33,443 INFO [generate_synthetic_data:362] Batch 180001-190000: inserted 20112 user_courses rows
+2025-09-02 07:05:28,089 INFO [generate_synthetic_data:415] Batch 180001-190000: inserted daily_activity rows=3663578
+2025-09-02 07:32:41,390 INFO [generate_synthetic_data:424] Batch 180001-190000: inserted sessions rows=4656525
+2025-09-02 07:38:53,391 INFO [generate_synthetic_data:433] Batch 180001-190000: inserted notifications rows=1099840
+2025-09-02 07:38:56,573 INFO [generate_synthetic_data:442] Batch 180001-190000: inserted churn_labels rows=10000
+2025-09-02 07:38:56,589 INFO [generate_synthetic_data:342] Starting batch 190001-200000
+2025-09-02 07:39:03,773 INFO [generate_synthetic_data:362] Batch 190001-200000: inserted 19991 user_courses rows
+2025-09-02 08:36:42,854 INFO [generate_synthetic_data:415] Batch 190001-200000: inserted daily_activity rows=3663844
+2025-09-02 09:03:06,102 INFO [generate_synthetic_data:424] Batch 190001-200000: inserted sessions rows=4648518
+2025-09-02 09:09:12,441 INFO [generate_synthetic_data:433] Batch 190001-200000: inserted notifications rows=1097172
+2025-09-02 09:09:15,666 INFO [generate_synthetic_data:442] Batch 190001-200000: inserted churn_labels rows=10000
+2025-09-02 09:09:15,666 INFO [generate_synthetic_data:342] Starting batch 200001-210000
+2025-09-02 09:09:23,756 INFO [generate_synthetic_data:362] Batch 200001-210000: inserted 19999 user_courses rows
+2025-09-02 10:06:05,953 INFO [generate_synthetic_data:415] Batch 200001-210000: inserted daily_activity rows=3678910
+2025-09-02 10:35:43,241 INFO [generate_synthetic_data:424] Batch 200001-210000: inserted sessions rows=4661743
+2025-09-02 10:44:30,201 INFO [generate_synthetic_data:433] Batch 200001-210000: inserted notifications rows=1103883
+2025-09-02 10:44:34,693 INFO [generate_synthetic_data:442] Batch 200001-210000: inserted churn_labels rows=10000
+2025-09-02 10:44:34,701 INFO [generate_synthetic_data:342] Starting batch 210001-220000
+2025-09-02 10:44:45,685 INFO [generate_synthetic_data:362] Batch 210001-220000: inserted 20001 user_courses rows
+2025-09-02 12:05:29,808 INFO [generate_synthetic_data:415] Batch 210001-220000: inserted daily_activity rows=3698815
+2025-09-02 12:43:34,778 INFO [generate_synthetic_data:424] Batch 210001-220000: inserted sessions rows=4714669
+2025-09-02 12:52:28,267 INFO [generate_synthetic_data:433] Batch 210001-220000: inserted notifications rows=1108535
+2025-09-02 12:52:33,001 INFO [generate_synthetic_data:442] Batch 210001-220000: inserted churn_labels rows=10000
+2025-09-02 12:52:33,010 INFO [generate_synthetic_data:342] Starting batch 220001-230000
+2025-09-02 12:52:44,188 INFO [generate_synthetic_data:362] Batch 220001-230000: inserted 20032 user_courses rows
+2025-09-02 14:11:33,967 INFO [generate_synthetic_data:415] Batch 220001-230000: inserted daily_activity rows=3672676
+2025-09-02 14:47:52,577 INFO [generate_synthetic_data:424] Batch 220001-230000: inserted sessions rows=4677813
+2025-09-02 14:55:39,477 INFO [generate_synthetic_data:433] Batch 220001-230000: inserted notifications rows=1103451
+2025-09-02 14:55:42,079 INFO [generate_synthetic_data:442] Batch 220001-230000: inserted churn_labels rows=10000
+2025-09-02 14:55:42,084 INFO [generate_synthetic_data:342] Starting batch 230001-240000
+2025-09-02 14:55:53,911 INFO [generate_synthetic_data:362] Batch 230001-240000: inserted 19852 user_courses rows
+2025-09-02 16:01:35,952 INFO [generate_synthetic_data:415] Batch 230001-240000: inserted daily_activity rows=3644956
+2025-09-02 16:39:49,601 INFO [generate_synthetic_data:424] Batch 230001-240000: inserted sessions rows=4639073
+2025-09-02 16:48:33,021 INFO [generate_synthetic_data:433] Batch 230001-240000: inserted notifications rows=1092808
+2025-09-02 16:48:37,633 INFO [generate_synthetic_data:442] Batch 230001-240000: inserted churn_labels rows=10000
+2025-09-02 16:48:37,642 INFO [generate_synthetic_data:342] Starting batch 240001-250000
+2025-09-02 16:48:48,783 INFO [generate_synthetic_data:362] Batch 240001-250000: inserted 20050 user_courses rows
+2025-09-02 18:08:40,176 INFO [generate_synthetic_data:415] Batch 240001-250000: inserted daily_activity rows=3706015
+2025-09-02 18:43:51,194 INFO [generate_synthetic_data:424] Batch 240001-250000: inserted sessions rows=4706636
+2025-09-02 18:53:07,450 INFO [generate_synthetic_data:433] Batch 240001-250000: inserted notifications rows=1112131
+2025-09-02 18:53:12,048 INFO [generate_synthetic_data:442] Batch 240001-250000: inserted churn_labels rows=10000
+2025-09-02 18:53:12,056 INFO [generate_synthetic_data:342] Starting batch 250001-260000
+2025-09-02 18:53:23,256 INFO [generate_synthetic_data:362] Batch 250001-260000: inserted 19937 user_courses rows
+2025-09-02 20:14:40,824 INFO [generate_synthetic_data:415] Batch 250001-260000: inserted daily_activity rows=3664410
+2025-09-02 20:49:05,827 INFO [generate_synthetic_data:424] Batch 250001-260000: inserted sessions rows=4655177
+2025-09-02 20:55:36,534 INFO [generate_synthetic_data:433] Batch 250001-260000: inserted notifications rows=1099034
+2025-09-02 20:55:39,871 INFO [generate_synthetic_data:442] Batch 250001-260000: inserted churn_labels rows=10000
+2025-09-02 20:55:39,888 INFO [generate_synthetic_data:342] Starting batch 260001-270000
+2025-09-02 20:55:48,214 INFO [generate_synthetic_data:362] Batch 260001-270000: inserted 20039 user_courses rows
+2025-09-02 21:49:36,820 INFO [generate_synthetic_data:415] Batch 260001-270000: inserted daily_activity rows=3659356
+2025-09-02 22:17:27,364 INFO [generate_synthetic_data:424] Batch 260001-270000: inserted sessions rows=4641330
+2025-09-02 22:23:59,331 INFO [generate_synthetic_data:433] Batch 260001-270000: inserted notifications rows=1096301
+2025-09-02 22:24:02,319 INFO [generate_synthetic_data:442] Batch 260001-270000: inserted churn_labels rows=10000
+2025-09-02 22:24:02,323 INFO [generate_synthetic_data:342] Starting batch 270001-280000
+2025-09-02 22:24:10,614 INFO [generate_synthetic_data:362] Batch 270001-280000: inserted 19879 user_courses rows
+2025-09-02 23:24:12,977 INFO [generate_synthetic_data:415] Batch 270001-280000: inserted daily_activity rows=3659176
+2025-09-02 23:54:36,631 INFO [generate_synthetic_data:424] Batch 270001-280000: inserted sessions rows=4651041
+2025-09-03 00:01:50,754 INFO [generate_synthetic_data:433] Batch 270001-280000: inserted notifications rows=1098502
+2025-09-03 00:01:54,013 INFO [generate_synthetic_data:442] Batch 270001-280000: inserted churn_labels rows=10000
+2025-09-03 00:01:54,029 INFO [generate_synthetic_data:342] Starting batch 280001-290000
+2025-09-03 00:02:02,663 INFO [generate_synthetic_data:362] Batch 280001-290000: inserted 19964 user_courses rows
+2025-09-03 01:06:27,041 INFO [generate_synthetic_data:415] Batch 280001-290000: inserted daily_activity rows=3624852
+2025-09-03 01:34:33,761 INFO [generate_synthetic_data:424] Batch 280001-290000: inserted sessions rows=4611849
+2025-09-03 01:41:05,987 INFO [generate_synthetic_data:433] Batch 280001-290000: inserted notifications rows=1087730
+2025-09-03 01:41:09,121 INFO [generate_synthetic_data:442] Batch 280001-290000: inserted churn_labels rows=10000
+2025-09-03 01:41:09,121 INFO [generate_synthetic_data:342] Starting batch 290001-300000
+2025-09-03 01:41:17,291 INFO [generate_synthetic_data:362] Batch 290001-300000: inserted 19922 user_courses rows
+2025-09-03 02:43:58,089 INFO [generate_synthetic_data:415] Batch 290001-300000: inserted daily_activity rows=3654896
+2025-09-03 03:11:09,674 INFO [generate_synthetic_data:424] Batch 290001-300000: inserted sessions rows=4638565
+2025-09-03 03:17:26,433 INFO [generate_synthetic_data:433] Batch 290001-300000: inserted notifications rows=1095737
+2025-09-03 03:17:29,409 INFO [generate_synthetic_data:442] Batch 290001-300000: inserted churn_labels rows=10000
+2025-09-03 03:17:29,419 INFO [generate_synthetic_data:342] Starting batch 300001-310000
+2025-09-03 03:17:37,603 INFO [generate_synthetic_data:362] Batch 300001-310000: inserted 20098 user_courses rows
+2025-09-03 04:21:00,799 INFO [generate_synthetic_data:415] Batch 300001-310000: inserted daily_activity rows=3711097
+2025-09-03 04:49:35,416 INFO [generate_synthetic_data:424] Batch 300001-310000: inserted sessions rows=4727651
+2025-09-03 04:56:07,083 INFO [generate_synthetic_data:433] Batch 300001-310000: inserted notifications rows=1113649
+2025-09-03 04:56:10,259 INFO [generate_synthetic_data:442] Batch 300001-310000: inserted churn_labels rows=10000
+2025-09-03 04:56:10,259 INFO [generate_synthetic_data:342] Starting batch 310001-320000
+2025-09-03 04:56:18,776 INFO [generate_synthetic_data:362] Batch 310001-320000: inserted 19988 user_courses rows
+2025-09-03 05:58:56,186 INFO [generate_synthetic_data:415] Batch 310001-320000: inserted daily_activity rows=3679774
+2025-09-03 06:26:30,308 INFO [generate_synthetic_data:424] Batch 310001-320000: inserted sessions rows=4670793
+2025-09-03 06:32:54,807 INFO [generate_synthetic_data:433] Batch 310001-320000: inserted notifications rows=1102653
+2025-09-03 06:32:58,483 INFO [generate_synthetic_data:442] Batch 310001-320000: inserted churn_labels rows=10000
+2025-09-03 06:32:58,483 INFO [generate_synthetic_data:342] Starting batch 320001-330000
+2025-09-03 06:33:06,380 INFO [generate_synthetic_data:362] Batch 320001-330000: inserted 20000 user_courses rows
+2025-09-03 07:35:21,911 INFO [generate_synthetic_data:415] Batch 320001-330000: inserted daily_activity rows=3654686
+2025-09-03 08:03:18,216 INFO [generate_synthetic_data:424] Batch 320001-330000: inserted sessions rows=4652931
+2025-09-03 08:09:46,048 INFO [generate_synthetic_data:433] Batch 320001-330000: inserted notifications rows=1096694
+2025-09-03 08:09:49,188 INFO [generate_synthetic_data:442] Batch 320001-330000: inserted churn_labels rows=10000
+2025-09-03 08:09:49,197 INFO [generate_synthetic_data:342] Starting batch 330001-340000
+2025-09-03 08:09:57,420 INFO [generate_synthetic_data:362] Batch 330001-340000: inserted 20005 user_courses rows
+2025-09-03 09:12:04,859 INFO [generate_synthetic_data:415] Batch 330001-340000: inserted daily_activity rows=3633069
+2025-09-03 09:39:26,976 INFO [generate_synthetic_data:424] Batch 330001-340000: inserted sessions rows=4613960
+2025-09-03 09:45:47,959 INFO [generate_synthetic_data:433] Batch 330001-340000: inserted notifications rows=1089843
+2025-09-03 09:45:51,107 INFO [generate_synthetic_data:442] Batch 330001-340000: inserted churn_labels rows=10000
+2025-09-03 09:45:51,124 INFO [generate_synthetic_data:342] Starting batch 340001-350000
+2025-09-03 09:45:59,427 INFO [generate_synthetic_data:362] Batch 340001-350000: inserted 20055 user_courses rows
+2025-09-03 10:50:50,662 INFO [generate_synthetic_data:415] Batch 340001-350000: inserted daily_activity rows=3658878
+2025-09-03 11:24:43,875 INFO [generate_synthetic_data:424] Batch 340001-350000: inserted sessions rows=4668051
+2025-09-03 11:33:34,665 INFO [generate_synthetic_data:433] Batch 340001-350000: inserted notifications rows=1097030
+2025-09-03 11:33:39,337 INFO [generate_synthetic_data:442] Batch 340001-350000: inserted churn_labels rows=10000
+2025-09-03 11:33:39,348 INFO [generate_synthetic_data:342] Starting batch 350001-360000
+2025-09-03 11:33:51,382 INFO [generate_synthetic_data:362] Batch 350001-360000: inserted 20095 user_courses rows
+2025-09-03 12:52:50,626 INFO [generate_synthetic_data:415] Batch 350001-360000: inserted daily_activity rows=3665180
+2025-09-03 13:30:06,433 INFO [generate_synthetic_data:424] Batch 350001-360000: inserted sessions rows=4662575
+2025-09-03 13:38:46,560 INFO [generate_synthetic_data:433] Batch 350001-360000: inserted notifications rows=1098239
+2025-09-03 13:38:51,166 INFO [generate_synthetic_data:442] Batch 350001-360000: inserted churn_labels rows=10000
+2025-09-03 13:38:51,176 INFO [generate_synthetic_data:342] Starting batch 360001-370000
+2025-09-03 13:39:02,663 INFO [generate_synthetic_data:362] Batch 360001-370000: inserted 19978 user_courses rows
+2025-09-03 14:58:34,577 INFO [generate_synthetic_data:415] Batch 360001-370000: inserted daily_activity rows=3650892
+2025-09-03 15:31:43,367 INFO [generate_synthetic_data:424] Batch 360001-370000: inserted sessions rows=4644442
+2025-09-03 15:40:13,786 INFO [generate_synthetic_data:433] Batch 360001-370000: inserted notifications rows=1095003
+2025-09-03 15:40:19,058 INFO [generate_synthetic_data:442] Batch 360001-370000: inserted churn_labels rows=10000
+2025-09-03 15:40:19,068 INFO [generate_synthetic_data:342] Starting batch 370001-380000
+2025-09-03 15:40:29,796 INFO [generate_synthetic_data:362] Batch 370001-380000: inserted 19987 user_courses rows
+2025-09-03 17:00:01,687 INFO [generate_synthetic_data:415] Batch 370001-380000: inserted daily_activity rows=3655664
+2025-09-03 17:33:46,130 INFO [generate_synthetic_data:424] Batch 370001-380000: inserted sessions rows=4645081
+2025-09-03 17:41:05,702 INFO [generate_synthetic_data:433] Batch 370001-380000: inserted notifications rows=1097589
+2025-09-03 17:41:09,522 INFO [generate_synthetic_data:442] Batch 370001-380000: inserted churn_labels rows=10000
+2025-09-03 17:41:09,524 INFO [generate_synthetic_data:342] Starting batch 380001-390000
+2025-09-03 17:41:23,214 INFO [generate_synthetic_data:362] Batch 380001-390000: inserted 20060 user_courses rows
+2025-09-03 20:03:17,040 INFO [generate_synthetic_data:415] Batch 380001-390000: inserted daily_activity rows=3646008
+2025-09-03 21:02:24,243 INFO [generate_synthetic_data:424] Batch 380001-390000: inserted sessions rows=4630079
+2025-09-03 21:11:36,390 INFO [generate_synthetic_data:433] Batch 380001-390000: inserted notifications rows=1092682
+2025-09-03 21:11:42,066 INFO [generate_synthetic_data:442] Batch 380001-390000: inserted churn_labels rows=10000
+2025-09-03 21:11:42,070 INFO [generate_synthetic_data:342] Starting batch 390001-400000
+2025-09-03 21:11:53,547 INFO [generate_synthetic_data:362] Batch 390001-400000: inserted 20010 user_courses rows
+2025-09-03 22:34:46,143 INFO [generate_synthetic_data:415] Batch 390001-400000: inserted daily_activity rows=3603949
+2025-09-03 23:01:42,114 INFO [generate_synthetic_data:424] Batch 390001-400000: inserted sessions rows=4572799
+2025-09-03 23:08:07,197 INFO [generate_synthetic_data:433] Batch 390001-400000: inserted notifications rows=1081960
+2025-09-03 23:08:11,441 INFO [generate_synthetic_data:442] Batch 390001-400000: inserted churn_labels rows=10000
+2025-09-03 23:08:11,448 INFO [generate_synthetic_data:342] Starting batch 400001-410000
+2025-09-03 23:08:20,546 INFO [generate_synthetic_data:362] Batch 400001-410000: inserted 20077 user_courses rows
+2025-09-04 00:24:43,959 INFO [generate_synthetic_data:415] Batch 400001-410000: inserted daily_activity rows=3645965
+2025-09-04 00:55:00,014 INFO [generate_synthetic_data:424] Batch 400001-410000: inserted sessions rows=4646904
+2025-09-04 01:02:14,615 INFO [generate_synthetic_data:433] Batch 400001-410000: inserted notifications rows=1093251
+2025-09-04 01:02:18,059 INFO [generate_synthetic_data:442] Batch 400001-410000: inserted churn_labels rows=10000
+2025-09-04 01:02:18,063 INFO [generate_synthetic_data:342] Starting batch 410001-420000
+2025-09-04 01:02:26,770 INFO [generate_synthetic_data:362] Batch 410001-420000: inserted 20068 user_courses rows
+2025-09-04 02:11:32,996 INFO [generate_synthetic_data:415] Batch 410001-420000: inserted daily_activity rows=3679730
+2025-09-04 02:41:01,702 INFO [generate_synthetic_data:424] Batch 410001-420000: inserted sessions rows=4678359
+2025-09-04 02:47:53,267 INFO [generate_synthetic_data:433] Batch 410001-420000: inserted notifications rows=1104098
+2025-09-04 02:47:56,720 INFO [generate_synthetic_data:442] Batch 410001-420000: inserted churn_labels rows=10000
+2025-09-04 02:47:56,735 INFO [generate_synthetic_data:342] Starting batch 420001-430000
+2025-09-04 02:48:04,342 INFO [generate_synthetic_data:362] Batch 420001-430000: inserted 20057 user_courses rows
+2025-09-04 03:56:02,653 INFO [generate_synthetic_data:415] Batch 420001-430000: inserted daily_activity rows=3661826
+2025-09-04 04:25:04,290 INFO [generate_synthetic_data:424] Batch 420001-430000: inserted sessions rows=4657429
+2025-09-04 04:31:46,671 INFO [generate_synthetic_data:433] Batch 420001-430000: inserted notifications rows=1098045
+2025-09-04 04:31:50,115 INFO [generate_synthetic_data:442] Batch 420001-430000: inserted churn_labels rows=10000
+2025-09-04 04:31:50,115 INFO [generate_synthetic_data:342] Starting batch 430001-440000
+2025-09-04 04:31:58,550 INFO [generate_synthetic_data:362] Batch 430001-440000: inserted 20121 user_courses rows
+2025-09-04 05:39:41,552 INFO [generate_synthetic_data:415] Batch 430001-440000: inserted daily_activity rows=3694767
+2025-09-04 06:10:20,563 INFO [generate_synthetic_data:424] Batch 430001-440000: inserted sessions rows=4703299
+2025-09-04 06:17:07,750 INFO [generate_synthetic_data:433] Batch 430001-440000: inserted notifications rows=1108530
+2025-09-04 06:17:11,172 INFO [generate_synthetic_data:442] Batch 430001-440000: inserted churn_labels rows=10000
+2025-09-04 06:17:11,172 INFO [generate_synthetic_data:342] Starting batch 440001-450000
+2025-09-04 06:17:18,492 INFO [generate_synthetic_data:362] Batch 440001-450000: inserted 20012 user_courses rows
+2025-09-04 07:24:03,266 INFO [generate_synthetic_data:415] Batch 440001-450000: inserted daily_activity rows=3652443
+2025-09-04 07:54:15,723 INFO [generate_synthetic_data:424] Batch 440001-450000: inserted sessions rows=4633952
+2025-09-04 08:00:58,679 INFO [generate_synthetic_data:433] Batch 440001-450000: inserted notifications rows=1094742
+2025-09-04 08:01:02,378 INFO [generate_synthetic_data:442] Batch 440001-450000: inserted churn_labels rows=10000
+2025-09-04 08:01:02,388 INFO [generate_synthetic_data:342] Starting batch 450001-460000
+2025-09-04 08:01:12,359 INFO [generate_synthetic_data:362] Batch 450001-460000: inserted 20027 user_courses rows
+2025-09-04 09:08:45,216 INFO [generate_synthetic_data:415] Batch 450001-460000: inserted daily_activity rows=3676578
+2025-09-04 09:36:54,906 INFO [generate_synthetic_data:424] Batch 450001-460000: inserted sessions rows=4674480
+2025-09-04 09:43:37,651 INFO [generate_synthetic_data:433] Batch 450001-460000: inserted notifications rows=1103202
+2025-09-04 09:43:40,811 INFO [generate_synthetic_data:442] Batch 450001-460000: inserted churn_labels rows=10000
+2025-09-04 09:43:40,811 INFO [generate_synthetic_data:342] Starting batch 460001-470000
+2025-09-04 09:43:48,764 INFO [generate_synthetic_data:362] Batch 460001-470000: inserted 19945 user_courses rows
+2025-09-04 11:04:33,879 INFO [generate_synthetic_data:415] Batch 460001-470000: inserted daily_activity rows=3678020
+2025-09-04 11:40:15,221 INFO [generate_synthetic_data:424] Batch 460001-470000: inserted sessions rows=4690752
+2025-09-04 11:49:30,247 INFO [generate_synthetic_data:433] Batch 460001-470000: inserted notifications rows=1103457
+2025-09-04 11:49:35,151 INFO [generate_synthetic_data:442] Batch 460001-470000: inserted churn_labels rows=10000
+2025-09-04 11:49:35,161 INFO [generate_synthetic_data:342] Starting batch 470001-480000
+2025-09-04 11:49:47,210 INFO [generate_synthetic_data:362] Batch 470001-480000: inserted 20028 user_courses rows
+2025-09-04 13:34:36,916 INFO [generate_synthetic_data:415] Batch 470001-480000: inserted daily_activity rows=3675509
+2025-09-04 14:13:35,580 INFO [generate_synthetic_data:424] Batch 470001-480000: inserted sessions rows=4671582
+2025-09-04 14:21:51,451 INFO [generate_synthetic_data:433] Batch 470001-480000: inserted notifications rows=1102966
+2025-09-04 14:21:56,104 INFO [generate_synthetic_data:442] Batch 470001-480000: inserted churn_labels rows=10000
+2025-09-04 14:21:56,116 INFO [generate_synthetic_data:342] Starting batch 480001-490000
+2025-09-04 14:22:08,209 INFO [generate_synthetic_data:362] Batch 480001-490000: inserted 19935 user_courses rows
+2025-09-04 15:46:36,249 INFO [generate_synthetic_data:415] Batch 480001-490000: inserted daily_activity rows=3667684
+2025-09-04 16:21:22,341 INFO [generate_synthetic_data:424] Batch 480001-490000: inserted sessions rows=4660548
+2025-09-04 16:30:02,524 INFO [generate_synthetic_data:433] Batch 480001-490000: inserted notifications rows=1100926
+2025-09-04 16:30:07,477 INFO [generate_synthetic_data:442] Batch 480001-490000: inserted churn_labels rows=10000
+2025-09-04 16:30:07,484 INFO [generate_synthetic_data:342] Starting batch 490001-500000
+2025-09-04 16:30:18,305 INFO [generate_synthetic_data:362] Batch 490001-500000: inserted 19942 user_courses rows
+2025-09-04 17:51:30,664 INFO [generate_synthetic_data:415] Batch 490001-500000: inserted daily_activity rows=3651759
+2025-09-04 18:29:23,247 INFO [generate_synthetic_data:424] Batch 490001-500000: inserted sessions rows=4645374
+2025-09-04 18:38:28,526 INFO [generate_synthetic_data:433] Batch 490001-500000: inserted notifications rows=1095168
+2025-09-04 18:38:33,238 INFO [generate_synthetic_data:442] Batch 490001-500000: inserted churn_labels rows=10000
+2025-09-04 18:38:33,245 INFO [generate_synthetic_data:342] Starting batch 500001-510000
+2025-09-04 18:38:45,400 INFO [generate_synthetic_data:362] Batch 500001-510000: inserted 19935 user_courses rows
+2025-09-04 19:47:03,545 INFO [generate_synthetic_data:415] Batch 500001-510000: inserted daily_activity rows=3635214
+2025-09-04 20:19:15,831 INFO [generate_synthetic_data:424] Batch 500001-510000: inserted sessions rows=4636357
+2025-09-04 20:26:29,623 INFO [generate_synthetic_data:433] Batch 500001-510000: inserted notifications rows=1090773
+2025-09-04 20:26:33,041 INFO [generate_synthetic_data:442] Batch 500001-510000: inserted churn_labels rows=10000
+2025-09-04 20:26:33,050 INFO [generate_synthetic_data:342] Starting batch 510001-520000
+2025-09-04 20:26:40,385 INFO [generate_synthetic_data:362] Batch 510001-520000: inserted 19871 user_courses rows
+2025-09-04 21:50:04,374 INFO [generate_synthetic_data:415] Batch 510001-520000: inserted daily_activity rows=3630192
+2025-09-04 22:35:09,273 INFO [generate_synthetic_data:424] Batch 510001-520000: inserted sessions rows=4618874
+2025-09-04 22:42:08,471 INFO [generate_synthetic_data:433] Batch 510001-520000: inserted notifications rows=1088274
+2025-09-04 22:42:11,839 INFO [generate_synthetic_data:442] Batch 510001-520000: inserted churn_labels rows=10000
+2025-09-04 22:42:11,839 INFO [generate_synthetic_data:342] Starting batch 520001-530000
+2025-09-04 22:42:20,824 INFO [generate_synthetic_data:362] Batch 520001-530000: inserted 20112 user_courses rows
+2025-09-04 23:58:54,053 INFO [generate_synthetic_data:415] Batch 520001-530000: inserted daily_activity rows=3644808
+2025-09-05 00:30:03,841 INFO [generate_synthetic_data:424] Batch 520001-530000: inserted sessions rows=4630907
+2025-09-05 00:37:17,709 INFO [generate_synthetic_data:433] Batch 520001-530000: inserted notifications rows=1092770
+2025-09-05 00:37:21,222 INFO [generate_synthetic_data:442] Batch 520001-530000: inserted churn_labels rows=10000
+2025-09-05 00:37:21,231 INFO [generate_synthetic_data:342] Starting batch 530001-540000
+2025-09-05 00:37:30,771 INFO [generate_synthetic_data:362] Batch 530001-540000: inserted 19890 user_courses rows
+2025-09-05 01:51:25,339 INFO [generate_synthetic_data:415] Batch 530001-540000: inserted daily_activity rows=3677279
+2025-09-05 02:23:14,030 INFO [generate_synthetic_data:424] Batch 530001-540000: inserted sessions rows=4676626
+2025-09-05 02:30:33,757 INFO [generate_synthetic_data:433] Batch 530001-540000: inserted notifications rows=1103138
+2025-09-05 02:30:37,241 INFO [generate_synthetic_data:442] Batch 530001-540000: inserted churn_labels rows=10000
+2025-09-05 02:30:37,257 INFO [generate_synthetic_data:342] Starting batch 540001-550000
+2025-09-05 02:30:45,377 INFO [generate_synthetic_data:362] Batch 540001-550000: inserted 20059 user_courses rows
+2025-09-05 03:42:43,931 INFO [generate_synthetic_data:415] Batch 540001-550000: inserted daily_activity rows=3676980
+2025-09-05 04:13:43,280 INFO [generate_synthetic_data:424] Batch 540001-550000: inserted sessions rows=4681813
+2025-09-05 04:20:39,739 INFO [generate_synthetic_data:433] Batch 540001-550000: inserted notifications rows=1102442
+2025-09-05 04:20:42,993 INFO [generate_synthetic_data:442] Batch 540001-550000: inserted churn_labels rows=10000
+2025-09-05 04:20:43,006 INFO [generate_synthetic_data:342] Starting batch 550001-560000
+2025-09-05 04:20:50,654 INFO [generate_synthetic_data:362] Batch 550001-560000: inserted 19984 user_courses rows
+2025-09-05 05:32:50,536 INFO [generate_synthetic_data:415] Batch 550001-560000: inserted daily_activity rows=3667463
+2025-09-05 06:03:38,376 INFO [generate_synthetic_data:424] Batch 550001-560000: inserted sessions rows=4659054
+2025-09-05 06:10:30,128 INFO [generate_synthetic_data:433] Batch 550001-560000: inserted notifications rows=1098854
+2025-09-05 06:10:33,376 INFO [generate_synthetic_data:442] Batch 550001-560000: inserted churn_labels rows=10000
+2025-09-05 06:10:33,391 INFO [generate_synthetic_data:342] Starting batch 560001-570000
+2025-09-05 06:10:41,658 INFO [generate_synthetic_data:362] Batch 560001-570000: inserted 19982 user_courses rows
+2025-09-05 07:20:38,242 INFO [generate_synthetic_data:415] Batch 560001-570000: inserted daily_activity rows=3631706
+2025-09-05 07:51:12,406 INFO [generate_synthetic_data:424] Batch 560001-570000: inserted sessions rows=4623656
+2025-09-05 07:58:06,830 INFO [generate_synthetic_data:433] Batch 560001-570000: inserted notifications rows=1089032
+2025-09-05 07:58:10,186 INFO [generate_synthetic_data:442] Batch 560001-570000: inserted churn_labels rows=10000
+2025-09-05 07:58:10,186 INFO [generate_synthetic_data:342] Starting batch 570001-580000
+2025-09-05 07:58:18,154 INFO [generate_synthetic_data:362] Batch 570001-580000: inserted 20060 user_courses rows
+2025-09-05 09:08:56,887 INFO [generate_synthetic_data:415] Batch 570001-580000: inserted daily_activity rows=3670470
+2025-09-05 09:44:20,181 INFO [generate_synthetic_data:424] Batch 570001-580000: inserted sessions rows=4670562
+2025-09-05 09:53:24,422 INFO [generate_synthetic_data:433] Batch 570001-580000: inserted notifications rows=1100846
+2025-09-05 09:53:29,146 INFO [generate_synthetic_data:442] Batch 570001-580000: inserted churn_labels rows=10000
+2025-09-05 09:53:29,158 INFO [generate_synthetic_data:342] Starting batch 580001-590000
+2025-09-05 09:53:40,845 INFO [generate_synthetic_data:362] Batch 580001-590000: inserted 19861 user_courses rows
+2025-09-05 11:20:11,137 INFO [generate_synthetic_data:415] Batch 580001-590000: inserted daily_activity rows=3681664
+2025-09-05 11:49:24,177 INFO [generate_synthetic_data:424] Batch 580001-590000: inserted sessions rows=4668856
+2025-09-05 11:55:25,975 INFO [generate_synthetic_data:433] Batch 580001-590000: inserted notifications rows=1104211
+2025-09-05 11:55:29,008 INFO [generate_synthetic_data:442] Batch 580001-590000: inserted churn_labels rows=10000
+2025-09-05 11:55:29,020 INFO [generate_synthetic_data:342] Starting batch 590001-600000
+2025-09-05 11:55:36,334 INFO [generate_synthetic_data:362] Batch 590001-600000: inserted 20019 user_courses rows
+2025-09-05 12:50:36,682 INFO [generate_synthetic_data:415] Batch 590001-600000: inserted daily_activity rows=3672626
+2025-09-05 13:24:06,134 INFO [generate_synthetic_data:424] Batch 590001-600000: inserted sessions rows=4665508
+2025-09-05 13:32:04,753 INFO [generate_synthetic_data:433] Batch 590001-600000: inserted notifications rows=1103934
+2025-09-05 13:32:08,729 INFO [generate_synthetic_data:442] Batch 590001-600000: inserted churn_labels rows=10000
+2025-09-05 13:32:08,735 INFO [generate_synthetic_data:342] Starting batch 600001-610000
+2025-09-05 13:32:17,632 INFO [generate_synthetic_data:362] Batch 600001-610000: inserted 20029 user_courses rows
+2025-09-05 14:25:15,923 INFO [generate_synthetic_data:415] Batch 600001-610000: inserted daily_activity rows=3661018
+2025-09-05 14:58:18,744 INFO [generate_synthetic_data:424] Batch 600001-610000: inserted sessions rows=4655178
+2025-09-05 15:06:28,187 INFO [generate_synthetic_data:433] Batch 600001-610000: inserted notifications rows=1097062
+2025-09-05 15:06:31,986 INFO [generate_synthetic_data:442] Batch 600001-610000: inserted churn_labels rows=10000
+2025-09-05 15:06:31,994 INFO [generate_synthetic_data:342] Starting batch 610001-620000
+2025-09-05 15:06:40,545 INFO [generate_synthetic_data:362] Batch 610001-620000: inserted 20061 user_courses rows
+2025-09-05 16:08:41,334 INFO [generate_synthetic_data:415] Batch 610001-620000: inserted daily_activity rows=3656194
+2025-09-05 16:41:41,033 INFO [generate_synthetic_data:424] Batch 610001-620000: inserted sessions rows=4647684
+2025-09-05 16:48:48,259 INFO [generate_synthetic_data:433] Batch 610001-620000: inserted notifications rows=1099134
+2025-09-05 16:48:51,830 INFO [generate_synthetic_data:442] Batch 610001-620000: inserted churn_labels rows=10000
+2025-09-05 16:48:51,846 INFO [generate_synthetic_data:342] Starting batch 620001-630000
+2025-09-05 16:49:01,390 INFO [generate_synthetic_data:362] Batch 620001-630000: inserted 19917 user_courses rows
+2025-09-05 18:06:26,787 INFO [generate_synthetic_data:415] Batch 620001-630000: inserted daily_activity rows=3655878
+2025-09-05 18:43:57,406 INFO [generate_synthetic_data:424] Batch 620001-630000: inserted sessions rows=4643350
+2025-09-05 18:52:20,511 INFO [generate_synthetic_data:433] Batch 620001-630000: inserted notifications rows=1095807
+2025-09-05 18:52:25,350 INFO [generate_synthetic_data:442] Batch 620001-630000: inserted churn_labels rows=10000
+2025-09-05 18:52:25,362 INFO [generate_synthetic_data:342] Starting batch 630001-640000
+2025-09-05 18:52:34,525 INFO [generate_synthetic_data:362] Batch 630001-640000: inserted 19861 user_courses rows
+2025-09-05 20:03:24,379 INFO [generate_synthetic_data:415] Batch 630001-640000: inserted daily_activity rows=3650841
+2025-09-05 20:31:33,320 INFO [generate_synthetic_data:424] Batch 630001-640000: inserted sessions rows=4647808
+2025-09-05 20:37:17,793 INFO [generate_synthetic_data:433] Batch 630001-640000: inserted notifications rows=1094134
+2025-09-05 20:37:20,828 INFO [generate_synthetic_data:442] Batch 630001-640000: inserted churn_labels rows=10000
+2025-09-05 20:37:20,828 INFO [generate_synthetic_data:342] Starting batch 640001-650000
+2025-09-05 20:37:28,857 INFO [generate_synthetic_data:362] Batch 640001-650000: inserted 20058 user_courses rows
+2025-09-05 21:28:58,114 INFO [generate_synthetic_data:415] Batch 640001-650000: inserted daily_activity rows=3663647
+2025-09-05 21:54:21,406 INFO [generate_synthetic_data:424] Batch 640001-650000: inserted sessions rows=4660253
+2025-09-05 22:00:09,879 INFO [generate_synthetic_data:433] Batch 640001-650000: inserted notifications rows=1099311
+2025-09-05 22:00:12,447 INFO [generate_synthetic_data:442] Batch 640001-650000: inserted churn_labels rows=10000
+2025-09-05 22:00:12,457 INFO [generate_synthetic_data:342] Starting batch 650001-660000
+2025-09-05 22:00:18,722 INFO [generate_synthetic_data:362] Batch 650001-660000: inserted 20060 user_courses rows
+2025-09-05 22:48:37,602 INFO [generate_synthetic_data:415] Batch 650001-660000: inserted daily_activity rows=3710468
+2025-09-05 23:14:16,608 INFO [generate_synthetic_data:424] Batch 650001-660000: inserted sessions rows=4730562
+2025-09-05 23:20:06,927 INFO [generate_synthetic_data:433] Batch 650001-660000: inserted notifications rows=1113684
+2025-09-05 23:20:09,642 INFO [generate_synthetic_data:442] Batch 650001-660000: inserted churn_labels rows=10000
+2025-09-05 23:20:09,658 INFO [generate_synthetic_data:342] Starting batch 660001-670000
+2025-09-05 23:20:16,567 INFO [generate_synthetic_data:362] Batch 660001-670000: inserted 20013 user_courses rows
+2025-09-06 00:23:40,742 INFO [generate_synthetic_data:415] Batch 660001-670000: inserted daily_activity rows=3648467
+2025-09-06 00:54:49,524 INFO [generate_synthetic_data:424] Batch 660001-670000: inserted sessions rows=4643968
+2025-09-06 01:02:07,427 INFO [generate_synthetic_data:433] Batch 660001-670000: inserted notifications rows=1093785
+2025-09-06 01:02:11,436 INFO [generate_synthetic_data:442] Batch 660001-670000: inserted churn_labels rows=10000
+2025-09-06 01:02:11,438 INFO [generate_synthetic_data:342] Starting batch 670001-680000
+2025-09-06 01:02:20,772 INFO [generate_synthetic_data:362] Batch 670001-680000: inserted 20064 user_courses rows
+2025-09-06 02:18:36,773 INFO [generate_synthetic_data:415] Batch 670001-680000: inserted daily_activity rows=3654118
+2025-09-06 02:49:43,805 INFO [generate_synthetic_data:424] Batch 670001-680000: inserted sessions rows=4640235
+2025-09-06 02:56:51,633 INFO [generate_synthetic_data:433] Batch 670001-680000: inserted notifications rows=1096071
+2025-09-06 02:56:55,226 INFO [generate_synthetic_data:442] Batch 670001-680000: inserted churn_labels rows=10000
+2025-09-06 02:56:55,235 INFO [generate_synthetic_data:342] Starting batch 680001-690000
+2025-09-06 02:57:04,396 INFO [generate_synthetic_data:362] Batch 680001-690000: inserted 19820 user_courses rows
+2025-09-06 04:14:26,633 INFO [generate_synthetic_data:415] Batch 680001-690000: inserted daily_activity rows=3666066
+2025-09-06 04:45:33,756 INFO [generate_synthetic_data:424] Batch 680001-690000: inserted sessions rows=4657582
+2025-09-06 04:52:47,662 INFO [generate_synthetic_data:433] Batch 680001-690000: inserted notifications rows=1100204
+2025-09-06 04:52:51,550 INFO [generate_synthetic_data:442] Batch 680001-690000: inserted churn_labels rows=10000
+2025-09-06 04:52:51,560 INFO [generate_synthetic_data:342] Starting batch 690001-700000
+2025-09-06 04:53:01,196 INFO [generate_synthetic_data:362] Batch 690001-700000: inserted 19888 user_courses rows
+2025-09-06 06:08:50,694 INFO [generate_synthetic_data:415] Batch 690001-700000: inserted daily_activity rows=3660663
+2025-09-06 06:39:57,788 INFO [generate_synthetic_data:424] Batch 690001-700000: inserted sessions rows=4660774
+2025-09-06 06:47:09,569 INFO [generate_synthetic_data:433] Batch 690001-700000: inserted notifications rows=1098880
+2025-09-06 06:47:13,199 INFO [generate_synthetic_data:442] Batch 690001-700000: inserted churn_labels rows=10000
+2025-09-06 06:47:13,210 INFO [generate_synthetic_data:342] Starting batch 700001-710000
+2025-09-06 06:47:22,758 INFO [generate_synthetic_data:362] Batch 700001-710000: inserted 19986 user_courses rows
+2025-09-06 08:02:52,413 INFO [generate_synthetic_data:415] Batch 700001-710000: inserted daily_activity rows=3630484
+2025-09-06 08:32:36,732 INFO [generate_synthetic_data:424] Batch 700001-710000: inserted sessions rows=4604249
+2025-09-06 08:39:26,085 INFO [generate_synthetic_data:433] Batch 700001-710000: inserted notifications rows=1088639
+2025-09-06 08:39:29,600 INFO [generate_synthetic_data:442] Batch 700001-710000: inserted churn_labels rows=10000
+2025-09-06 08:39:29,600 INFO [generate_synthetic_data:342] Starting batch 710001-720000
+2025-09-06 08:39:38,787 INFO [generate_synthetic_data:362] Batch 710001-720000: inserted 19988 user_courses rows
+2025-09-06 09:54:01,643 INFO [generate_synthetic_data:415] Batch 710001-720000: inserted daily_activity rows=3664418
+2025-09-06 10:24:10,648 INFO [generate_synthetic_data:424] Batch 710001-720000: inserted sessions rows=4641658
+2025-09-06 10:31:03,740 INFO [generate_synthetic_data:433] Batch 710001-720000: inserted notifications rows=1100213
+2025-09-06 10:31:07,196 INFO [generate_synthetic_data:442] Batch 710001-720000: inserted churn_labels rows=10000
+2025-09-06 10:31:07,207 INFO [generate_synthetic_data:342] Starting batch 720001-730000
+2025-09-06 10:31:16,334 INFO [generate_synthetic_data:362] Batch 720001-730000: inserted 20039 user_courses rows
+2025-09-06 11:45:36,398 INFO [generate_synthetic_data:415] Batch 720001-730000: inserted daily_activity rows=3665595
+2025-09-06 12:15:45,516 INFO [generate_synthetic_data:424] Batch 720001-730000: inserted sessions rows=4669368
+2025-09-06 12:22:41,445 INFO [generate_synthetic_data:433] Batch 720001-730000: inserted notifications rows=1098202
+2025-09-06 12:22:44,962 INFO [generate_synthetic_data:442] Batch 720001-730000: inserted churn_labels rows=10000
+2025-09-06 12:22:44,972 INFO [generate_synthetic_data:342] Starting batch 730001-740000
+2025-09-06 12:22:53,467 INFO [generate_synthetic_data:362] Batch 730001-740000: inserted 20030 user_courses rows
+2025-09-06 13:37:00,761 INFO [generate_synthetic_data:415] Batch 730001-740000: inserted daily_activity rows=3624644
+2025-09-06 14:07:42,630 INFO [generate_synthetic_data:424] Batch 730001-740000: inserted sessions rows=4614343
+2025-09-06 14:14:37,523 INFO [generate_synthetic_data:433] Batch 730001-740000: inserted notifications rows=1088043
+2025-09-06 14:14:41,140 INFO [generate_synthetic_data:442] Batch 730001-740000: inserted churn_labels rows=10000
+2025-09-06 14:14:41,151 INFO [generate_synthetic_data:342] Starting batch 740001-750000
+2025-09-06 14:14:51,210 INFO [generate_synthetic_data:362] Batch 740001-750000: inserted 19969 user_courses rows
+2025-09-06 15:37:04,242 INFO [generate_synthetic_data:415] Batch 740001-750000: inserted daily_activity rows=3659332
+2025-09-06 16:09:15,625 INFO [generate_synthetic_data:424] Batch 740001-750000: inserted sessions rows=4653155
+2025-09-06 16:16:43,581 INFO [generate_synthetic_data:433] Batch 740001-750000: inserted notifications rows=1098760
+2025-09-06 16:16:47,693 INFO [generate_synthetic_data:442] Batch 740001-750000: inserted churn_labels rows=10000
+2025-09-06 16:16:47,695 INFO [generate_synthetic_data:342] Starting batch 750001-760000
+2025-09-06 16:16:57,282 INFO [generate_synthetic_data:362] Batch 750001-760000: inserted 20158 user_courses rows
+2025-09-06 17:37:14,929 INFO [generate_synthetic_data:415] Batch 750001-760000: inserted daily_activity rows=3650141
+2025-09-06 18:06:10,361 INFO [generate_synthetic_data:424] Batch 750001-760000: inserted sessions rows=4646943
+2025-09-06 18:12:13,160 INFO [generate_synthetic_data:433] Batch 750001-760000: inserted notifications rows=1094913
+2025-09-06 18:12:16,402 INFO [generate_synthetic_data:442] Batch 750001-760000: inserted churn_labels rows=10000
+2025-09-06 18:12:16,420 INFO [generate_synthetic_data:342] Starting batch 760001-770000
+2025-09-06 18:12:25,061 INFO [generate_synthetic_data:362] Batch 760001-770000: inserted 19966 user_courses rows
+2025-09-06 19:57:54,673 INFO [generate_synthetic_data:415] Batch 760001-770000: inserted daily_activity rows=3646244
+2025-09-06 20:28:57,676 INFO [generate_synthetic_data:424] Batch 760001-770000: inserted sessions rows=4640151
+2025-09-06 20:36:10,874 INFO [generate_synthetic_data:433] Batch 760001-770000: inserted notifications rows=1094503
+2025-09-06 20:36:14,344 INFO [generate_synthetic_data:442] Batch 760001-770000: inserted churn_labels rows=10000
+2025-09-06 20:36:14,363 INFO [generate_synthetic_data:342] Starting batch 770001-780000
+2025-09-06 20:36:23,879 INFO [generate_synthetic_data:362] Batch 770001-780000: inserted 20079 user_courses rows
+2025-09-06 21:48:36,749 INFO [generate_synthetic_data:415] Batch 770001-780000: inserted daily_activity rows=3620309
+2025-09-06 22:20:11,947 INFO [generate_synthetic_data:424] Batch 770001-780000: inserted sessions rows=4589760
+2025-09-06 22:27:45,021 INFO [generate_synthetic_data:433] Batch 770001-780000: inserted notifications rows=1086248
+2025-09-06 22:27:48,172 INFO [generate_synthetic_data:442] Batch 770001-780000: inserted churn_labels rows=10000
+2025-09-06 22:27:48,188 INFO [generate_synthetic_data:342] Starting batch 780001-790000
+2025-09-06 22:27:56,911 INFO [generate_synthetic_data:362] Batch 780001-790000: inserted 20000 user_courses rows
+2025-09-06 23:40:57,292 INFO [generate_synthetic_data:415] Batch 780001-790000: inserted daily_activity rows=3679319
+2025-09-07 00:13:11,262 INFO [generate_synthetic_data:424] Batch 780001-790000: inserted sessions rows=4681046
+2025-09-07 00:20:23,294 INFO [generate_synthetic_data:433] Batch 780001-790000: inserted notifications rows=1103834
+2025-09-07 00:20:26,644 INFO [generate_synthetic_data:442] Batch 780001-790000: inserted churn_labels rows=10000
+2025-09-07 00:20:26,646 INFO [generate_synthetic_data:342] Starting batch 790001-800000
+2025-09-07 00:20:35,966 INFO [generate_synthetic_data:362] Batch 790001-800000: inserted 20062 user_courses rows
+2025-09-07 01:30:13,939 INFO [generate_synthetic_data:415] Batch 790001-800000: inserted daily_activity rows=3668069
+2025-09-07 02:01:19,589 INFO [generate_synthetic_data:424] Batch 790001-800000: inserted sessions rows=4654877
+2025-09-07 02:08:34,699 INFO [generate_synthetic_data:433] Batch 790001-800000: inserted notifications rows=1100435
+2025-09-07 02:08:38,028 INFO [generate_synthetic_data:442] Batch 790001-800000: inserted churn_labels rows=10000
+2025-09-07 02:08:38,039 INFO [generate_synthetic_data:342] Starting batch 800001-810000
+2025-09-07 02:08:47,754 INFO [generate_synthetic_data:362] Batch 800001-810000: inserted 20015 user_courses rows
+2025-09-07 03:19:12,050 INFO [generate_synthetic_data:415] Batch 800001-810000: inserted daily_activity rows=3662200
+2025-09-07 03:50:55,140 INFO [generate_synthetic_data:424] Batch 800001-810000: inserted sessions rows=4657390
+2025-09-07 03:58:04,731 INFO [generate_synthetic_data:433] Batch 800001-810000: inserted notifications rows=1100324
+2025-09-07 03:58:08,081 INFO [generate_synthetic_data:442] Batch 800001-810000: inserted churn_labels rows=10000
+2025-09-07 03:58:08,097 INFO [generate_synthetic_data:342] Starting batch 810001-820000
+2025-09-07 03:58:16,879 INFO [generate_synthetic_data:362] Batch 810001-820000: inserted 19994 user_courses rows
+2025-09-07 05:09:10,192 INFO [generate_synthetic_data:415] Batch 810001-820000: inserted daily_activity rows=3669342
+2025-09-07 05:39:10,586 INFO [generate_synthetic_data:424] Batch 810001-820000: inserted sessions rows=4664504
+2025-09-07 05:45:59,619 INFO [generate_synthetic_data:433] Batch 810001-820000: inserted notifications rows=1099322
+2025-09-07 05:46:02,670 INFO [generate_synthetic_data:442] Batch 810001-820000: inserted churn_labels rows=10000
+2025-09-07 05:46:02,670 INFO [generate_synthetic_data:342] Starting batch 820001-830000
+2025-09-07 05:46:11,420 INFO [generate_synthetic_data:362] Batch 820001-830000: inserted 19864 user_courses rows
+2025-09-07 06:54:10,424 INFO [generate_synthetic_data:415] Batch 820001-830000: inserted daily_activity rows=3673696
+2025-09-07 07:23:24,463 INFO [generate_synthetic_data:424] Batch 820001-830000: inserted sessions rows=4672051
+2025-09-07 07:30:09,739 INFO [generate_synthetic_data:433] Batch 820001-830000: inserted notifications rows=1101908
+2025-09-07 07:30:13,038 INFO [generate_synthetic_data:442] Batch 820001-830000: inserted churn_labels rows=10000
+2025-09-07 07:30:13,055 INFO [generate_synthetic_data:342] Starting batch 830001-840000
+2025-09-07 07:30:21,527 INFO [generate_synthetic_data:362] Batch 830001-840000: inserted 20091 user_courses rows
+2025-09-07 08:38:22,743 INFO [generate_synthetic_data:415] Batch 830001-840000: inserted daily_activity rows=3667895
+2025-09-07 09:07:33,277 INFO [generate_synthetic_data:424] Batch 830001-840000: inserted sessions rows=4657505
+2025-09-07 09:14:17,954 INFO [generate_synthetic_data:433] Batch 830001-840000: inserted notifications rows=1100537
+2025-09-07 09:14:21,073 INFO [generate_synthetic_data:442] Batch 830001-840000: inserted churn_labels rows=10000
+2025-09-07 09:14:21,082 INFO [generate_synthetic_data:342] Starting batch 840001-850000
+2025-09-07 09:14:29,646 INFO [generate_synthetic_data:362] Batch 840001-850000: inserted 19965 user_courses rows
+2025-09-07 10:22:41,027 INFO [generate_synthetic_data:415] Batch 840001-850000: inserted daily_activity rows=3670892
+2025-09-07 10:51:56,906 INFO [generate_synthetic_data:424] Batch 840001-850000: inserted sessions rows=4672995
+2025-09-07 10:58:44,859 INFO [generate_synthetic_data:433] Batch 840001-850000: inserted notifications rows=1100296
+2025-09-07 10:58:48,033 INFO [generate_synthetic_data:442] Batch 840001-850000: inserted churn_labels rows=10000
+2025-09-07 10:58:48,033 INFO [generate_synthetic_data:342] Starting batch 850001-860000
+2025-09-07 10:58:56,268 INFO [generate_synthetic_data:362] Batch 850001-860000: inserted 19929 user_courses rows
+2025-09-07 12:06:51,790 INFO [generate_synthetic_data:415] Batch 850001-860000: inserted daily_activity rows=3637122
+2025-09-07 12:36:19,630 INFO [generate_synthetic_data:424] Batch 850001-860000: inserted sessions rows=4627481
+2025-09-07 12:42:57,939 INFO [generate_synthetic_data:433] Batch 850001-860000: inserted notifications rows=1090228
+2025-09-07 12:43:01,513 INFO [generate_synthetic_data:442] Batch 850001-860000: inserted churn_labels rows=10000
+2025-09-07 12:43:01,513 INFO [generate_synthetic_data:342] Starting batch 860001-870000
+2025-09-07 12:43:09,886 INFO [generate_synthetic_data:362] Batch 860001-870000: inserted 19930 user_courses rows
+2025-09-07 13:51:15,222 INFO [generate_synthetic_data:415] Batch 860001-870000: inserted daily_activity rows=3688055
+2025-09-07 14:21:56,379 INFO [generate_synthetic_data:424] Batch 860001-870000: inserted sessions rows=4699856
+2025-09-07 14:28:42,180 INFO [generate_synthetic_data:433] Batch 860001-870000: inserted notifications rows=1105731
+2025-09-07 14:28:45,573 INFO [generate_synthetic_data:442] Batch 860001-870000: inserted churn_labels rows=10000
+2025-09-07 14:28:45,581 INFO [generate_synthetic_data:342] Starting batch 870001-880000
+2025-09-07 14:28:54,528 INFO [generate_synthetic_data:362] Batch 870001-880000: inserted 20043 user_courses rows
+2025-09-07 15:37:19,172 INFO [generate_synthetic_data:415] Batch 870001-880000: inserted daily_activity rows=3669981
+2025-09-07 16:07:25,665 INFO [generate_synthetic_data:424] Batch 870001-880000: inserted sessions rows=4666781
+2025-09-07 16:14:15,271 INFO [generate_synthetic_data:433] Batch 870001-880000: inserted notifications rows=1100711
+2025-09-07 16:14:18,043 INFO [generate_synthetic_data:442] Batch 870001-880000: inserted churn_labels rows=10000
+2025-09-07 16:14:18,061 INFO [generate_synthetic_data:342] Starting batch 880001-890000
+2025-09-07 16:14:24,384 INFO [generate_synthetic_data:362] Batch 880001-890000: inserted 20086 user_courses rows
+2025-09-07 17:28:09,683 INFO [generate_synthetic_data:415] Batch 880001-890000: inserted daily_activity rows=3672821
+2025-09-07 17:56:46,705 INFO [generate_synthetic_data:424] Batch 880001-890000: inserted sessions rows=4666948
+2025-09-07 18:03:45,596 INFO [generate_synthetic_data:433] Batch 880001-890000: inserted notifications rows=1102463
+2025-09-07 18:03:49,174 INFO [generate_synthetic_data:442] Batch 880001-890000: inserted churn_labels rows=10000
+2025-09-07 18:03:49,189 INFO [generate_synthetic_data:342] Starting batch 890001-900000
+2025-09-07 18:03:58,006 INFO [generate_synthetic_data:362] Batch 890001-900000: inserted 19989 user_courses rows
+2025-09-07 19:10:50,978 INFO [generate_synthetic_data:415] Batch 890001-900000: inserted daily_activity rows=3652909
+2025-09-07 19:43:55,537 INFO [generate_synthetic_data:424] Batch 890001-900000: inserted sessions rows=4645073
+2025-09-07 19:54:12,257 INFO [generate_synthetic_data:433] Batch 890001-900000: inserted notifications rows=1094977
+2025-09-07 19:54:17,661 INFO [generate_synthetic_data:442] Batch 890001-900000: inserted churn_labels rows=10000
+2025-09-07 19:54:17,673 INFO [generate_synthetic_data:342] Starting batch 900001-910000
+2025-09-07 19:54:31,407 INFO [generate_synthetic_data:362] Batch 900001-910000: inserted 20041 user_courses rows
+2025-09-07 21:19:10,485 INFO [generate_synthetic_data:415] Batch 900001-910000: inserted daily_activity rows=3693207
+2025-09-07 21:54:30,956 INFO [generate_synthetic_data:424] Batch 900001-910000: inserted sessions rows=4704251
+2025-09-07 22:02:24,500 INFO [generate_synthetic_data:433] Batch 900001-910000: inserted notifications rows=1110513
+2025-09-07 22:02:32,704 INFO [generate_synthetic_data:442] Batch 900001-910000: inserted churn_labels rows=10000
+2025-09-07 22:02:32,715 INFO [generate_synthetic_data:342] Starting batch 910001-920000
+2025-09-07 22:02:48,980 INFO [generate_synthetic_data:362] Batch 910001-920000: inserted 20022 user_courses rows
+2025-09-07 23:32:56,078 INFO [generate_synthetic_data:415] Batch 910001-920000: inserted daily_activity rows=3683826
+2025-09-08 00:03:29,725 INFO [generate_synthetic_data:424] Batch 910001-920000: inserted sessions rows=4678758
+2025-09-08 00:10:24,865 INFO [generate_synthetic_data:433] Batch 910001-920000: inserted notifications rows=1104823
+2025-09-08 00:10:28,506 INFO [generate_synthetic_data:442] Batch 910001-920000: inserted churn_labels rows=10000
+2025-09-08 00:10:28,522 INFO [generate_synthetic_data:342] Starting batch 920001-930000
+2025-09-08 00:10:37,401 INFO [generate_synthetic_data:362] Batch 920001-930000: inserted 19971 user_courses rows
+2025-09-08 01:25:20,530 INFO [generate_synthetic_data:415] Batch 920001-930000: inserted daily_activity rows=3676079
+2025-09-08 01:55:42,775 INFO [generate_synthetic_data:424] Batch 920001-930000: inserted sessions rows=4691104
+2025-09-08 02:02:43,379 INFO [generate_synthetic_data:433] Batch 920001-930000: inserted notifications rows=1103915
+2025-09-08 02:02:46,930 INFO [generate_synthetic_data:442] Batch 920001-930000: inserted churn_labels rows=10000
+2025-09-08 02:02:46,930 INFO [generate_synthetic_data:342] Starting batch 930001-940000
+2025-09-08 02:02:55,796 INFO [generate_synthetic_data:362] Batch 930001-940000: inserted 19842 user_courses rows
+2025-09-08 03:15:18,182 INFO [generate_synthetic_data:415] Batch 930001-940000: inserted daily_activity rows=3629284
+2025-09-08 03:45:20,744 INFO [generate_synthetic_data:424] Batch 930001-940000: inserted sessions rows=4614654
+2025-09-08 03:52:15,108 INFO [generate_synthetic_data:433] Batch 930001-940000: inserted notifications rows=1089668
+2025-09-08 03:52:18,838 INFO [generate_synthetic_data:442] Batch 930001-940000: inserted churn_labels rows=10000
+2025-09-08 03:52:18,838 INFO [generate_synthetic_data:342] Starting batch 940001-950000
+2025-09-08 03:52:27,872 INFO [generate_synthetic_data:362] Batch 940001-950000: inserted 19991 user_courses rows
+2025-09-08 05:06:17,578 INFO [generate_synthetic_data:415] Batch 940001-950000: inserted daily_activity rows=3661357
+2025-09-08 05:36:25,954 INFO [generate_synthetic_data:424] Batch 940001-950000: inserted sessions rows=4649486
+2025-09-08 05:43:20,634 INFO [generate_synthetic_data:433] Batch 940001-950000: inserted notifications rows=1097279
+2025-09-08 05:43:24,144 INFO [generate_synthetic_data:442] Batch 940001-950000: inserted churn_labels rows=10000
+2025-09-08 05:43:24,160 INFO [generate_synthetic_data:342] Starting batch 950001-960000
+2025-09-08 05:43:33,076 INFO [generate_synthetic_data:362] Batch 950001-960000: inserted 20083 user_courses rows
+2025-09-08 06:57:48,006 INFO [generate_synthetic_data:415] Batch 950001-960000: inserted daily_activity rows=3701455
+2025-09-08 07:28:09,003 INFO [generate_synthetic_data:424] Batch 950001-960000: inserted sessions rows=4704948
+2025-09-08 07:35:13,365 INFO [generate_synthetic_data:433] Batch 950001-960000: inserted notifications rows=1110464
+2025-09-08 07:35:16,664 INFO [generate_synthetic_data:442] Batch 950001-960000: inserted churn_labels rows=10000
+2025-09-08 07:35:16,671 INFO [generate_synthetic_data:342] Starting batch 960001-970000
+2025-09-08 07:35:25,671 INFO [generate_synthetic_data:362] Batch 960001-970000: inserted 19979 user_courses rows
+2025-09-08 08:48:20,645 INFO [generate_synthetic_data:415] Batch 960001-970000: inserted daily_activity rows=3640159
+2025-09-08 09:18:15,016 INFO [generate_synthetic_data:424] Batch 960001-970000: inserted sessions rows=4633978
+2025-09-08 09:25:06,952 INFO [generate_synthetic_data:433] Batch 960001-970000: inserted notifications rows=1092092
+2025-09-08 09:25:10,494 INFO [generate_synthetic_data:442] Batch 960001-970000: inserted churn_labels rows=10000
+2025-09-08 09:25:10,494 INFO [generate_synthetic_data:342] Starting batch 970001-980000
+2025-09-08 09:25:19,605 INFO [generate_synthetic_data:362] Batch 970001-980000: inserted 20102 user_courses rows
+2025-09-08 10:50:23,080 INFO [generate_synthetic_data:415] Batch 970001-980000: inserted daily_activity rows=3671541
+2025-09-08 11:29:20,581 INFO [generate_synthetic_data:424] Batch 970001-980000: inserted sessions rows=4660597
+2025-09-08 11:38:29,786 INFO [generate_synthetic_data:433] Batch 970001-980000: inserted notifications rows=1101017
+2025-09-08 11:38:34,757 INFO [generate_synthetic_data:442] Batch 970001-980000: inserted churn_labels rows=10000
+2025-09-08 11:38:34,768 INFO [generate_synthetic_data:342] Starting batch 980001-990000
+2025-09-08 11:38:46,672 INFO [generate_synthetic_data:362] Batch 980001-990000: inserted 20074 user_courses rows
+2025-09-08 12:59:39,837 INFO [generate_synthetic_data:415] Batch 980001-990000: inserted daily_activity rows=3700546
+2025-09-08 13:28:10,364 INFO [generate_synthetic_data:424] Batch 980001-990000: inserted sessions rows=4715184
+2025-09-08 13:34:30,845 INFO [generate_synthetic_data:433] Batch 980001-990000: inserted notifications rows=1109613
+2025-09-08 13:34:34,225 INFO [generate_synthetic_data:442] Batch 980001-990000: inserted churn_labels rows=10000
+2025-09-08 13:34:34,235 INFO [generate_synthetic_data:342] Starting batch 990001-1000000
+2025-09-08 13:34:42,643 INFO [generate_synthetic_data:362] Batch 990001-1000000: inserted 19970 user_courses rows
+2025-09-08 14:38:22,636 INFO [generate_synthetic_data:415] Batch 990001-1000000: inserted daily_activity rows=3656942
+2025-09-08 15:09:31,869 INFO [generate_synthetic_data:424] Batch 990001-1000000: inserted sessions rows=4649251
+2025-09-08 15:17:55,462 INFO [generate_synthetic_data:433] Batch 990001-1000000: inserted notifications rows=1096222
+2025-09-08 15:17:59,030 INFO [generate_synthetic_data:442] Batch 990001-1000000: inserted churn_labels rows=10000
+2025-09-08 15:17:59,039 INFO [generate_synthetic_data:449] Data generation complete in 651701.50 seconds
